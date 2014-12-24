@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<template id="503">
+    <html>
+        <head>
+            <title t-esc="status_message">Service Unavailable</title>
+            <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css' />
+            <link href='/website_maintenance/static/src/css/maintenance.css' rel='stylesheet' type='text/css' />
+            <!--
+            <link rel='stylesheet' href='/web/static/lib/fontawesome/css/font-awesome.css'/>
+            <link rel='stylesheet' href='/web/static/lib/bootstrap/css/bootstrap.css'/>
+            <link rel='stylesheet' href='/website/static/src/css/website.css'/>
+            <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
+            <script type="text/javascript" src="/web/static/lib/bootstrap/js/bootstrap.js"></script>
+            -->
+            <!--
+            <script>
+                $(document).ready(function() {
+                    var button = $('#reset_templates_button');
+                    button.click(function() {
+                        var dialog = $('#reset_template_confirmation').modal('show');
+                        var input = dialog.find('input[type="text"]').val('').focus();
+                        var dialog_form = dialog.find('form');
+                        dialog_form.submit(function() {
+                            if (input.val() == dialog.find('.confirm_word').text()) {
+                                dialog.modal('hide');
+                                button.prop('disabled', true).text('Working...');
+                                $('#reset_templates_form').trigger('submit');
+                            } else {
+                                input.val('').focus();
+                            }
+                            return false;
+                        });
+                        return false;
+                    });
+                });
+            </script>
+            -->
+        </head>
+        <body>
+            <div id="maintenance_error">
+                <div class="message"> 
+                    <img src='/logo.png' alt='Odoo: Open Source Business Apps' />
+                    <h2><t t-esc="status_code"/>: <t t-esc="status_message"/></h2>
+                    <p>
+                        <t t-esc="status_message"/>
+                    </p>
+                    <p>
+                        <a class="button" href="mailto:info@company.com">Contact-us</a>
+                    </p>
+                    <p class="note">
+                        If you have any question or remark please contact us at <a href='mailto:info@company.com'>info@company.com</a>.
+                    </p>
+                </div>
+            </div>
+        <!--
+            <div id="reset_template_confirmation" class="modal" tabindex="-1" role="dialog" aria-hidden="true" t-ignore="true">
+                <div class="modal-dialog">
+                    <form class="form-horizontal" role="form">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 class="modal-title">Reset templates</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group mb0">
+                                <label for="page-name" class="col-sm-9">
+                                    <p>The selected templates will be reset to their factory settings.</p>
+                                    <p>Type '<i class="confirm_word">yes</i>' in the box below if you want to confirm.</p>
+                                </label>
+                                <div class="col-sm-3 mt16">
+                                    <input type="text" class="form-control" required="required" placeholder="yes"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Confirm" class="btn btn-primary"/>
+                            <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        -->
+        <!--
+            <div id="wrapwrap">
+                <div class="navbar navbar-default navbar-static-top">
+                    <div class="container">
+                        <div class="collapse navbar-collapse navbar-top-collapse">
+                            <ul class="nav navbar-nav pull-right">
+                                <li><a href="/">Home</a></li>
+                                <li><a href="javascript: window.history.back()">Back</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb32">
+                    <div class="oe_structure">
+                        <h1 class="container mt32"></h1>
+                        <i class="fa-spinner fa-spin icon-lg"></i>Came back soon.
+                    </div>
+                </div>
+            </div>
+        -->
+        </body>
+    </html>
+<!--
+    <t t-call="website.layout">
+        <div id="wrap">
+            <div class="container">
+                <h1 class="mt32">503: Service Unavailable</h1>
+                <p>We sorry, but now have maintenance our service now.</p>
+                <p>Maybe you can try later ?</p>
+                <i class="icon-spinner icon-spin icon-large"></i>Came back soon.
+            </div>
+        </div>
+    </t>
+-->
+</template>
+    </data>
+</openerp>
