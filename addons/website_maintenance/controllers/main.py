@@ -3,14 +3,15 @@ import logging
 import werkzeug
 import openerp
 from openerp.addons.web import http
-from openerp.http import request, STATIC_CACHE
-from openerp.exceptions import Warning
+from openerp.http import request
+#from openerp.exceptions import Warning
 
 logger = logging.getLogger(__name__)
 
 
 class MaintenanceError(BaseException):
     pass
+
 class WebsiteMaintenance(openerp.addons.website.controllers.main.Website):
     
     def is_maintenance_mode(self):
@@ -19,20 +20,22 @@ class WebsiteMaintenance(openerp.addons.website.controllers.main.Website):
             request.cr, request.uid, 'website.maintenance_mode')
         logger.debug("maintenance_mode value: %s" % (maintenance_mode))
         if maintenance_mode in is_on:
-            code=503
             logger.warn("Maintenance mode on")
-            #w= Warning('Maintenance Mode')
+            
+            if not request.uid:
+                logger.info("Not uid, request auth public")
+                self._auth_method_public()
+
+            code=503
             status_message = request.registry['ir.config_parameter'].get_param(
                 request.cr, request.uid, 'website.maintenance_message', 
                 "We're maintenance now")
             values = {
                 'status_message': status_message,
                 'status_code': code,
+                'company_email': request.env.user.company_id.email
             }
             logger.debug(values)
-            if not request.uid:
-                logger.info("Not uid, request auth public")
-                self._auth_method_public()
             try:
                 html = request.website._render('website_maintenance.%s' % code, values)
             except Exception:

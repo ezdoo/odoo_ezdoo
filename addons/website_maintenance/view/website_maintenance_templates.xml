@@ -47,11 +47,11 @@
                     <p>
                         <t t-esc="status_message"/>
                     </p>
-                    <p>
-                        <a class="button" href="mailto:info@company.com">Contact-us</a>
+                    <p t-if="company_email">
+                        <a class="button" t-attf-href="mailto:{{company_email}}">Contact-us</a>
                     </p>
                     <p class="note">
-                        If you have any question or remark please contact us at <a href='mailto:info@company.com'>info@company.com</a>.
+                        If you have any question or remark please contact us at <a t-attf-href="mailto:{{company_email}}"><t t-esc="company_email" /></a>.
                     </p>
                 </div>
             </div>
