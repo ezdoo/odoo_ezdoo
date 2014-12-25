@@ -8,10 +8,11 @@
     'license': 'AGPL-3',
     'depends': ['website'],
     'data': [
-        'view/website_maintenance_templates.xml'
-            ],
+        'view/website_maintenance_templates.xml',
+        'view/res_config.xml'
+    ],
     'demo': [],
     'installable': True,
-    'auto_install': False,
+    'auto_install': True,
 }
 

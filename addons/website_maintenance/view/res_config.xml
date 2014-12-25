@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_website_maintenance_config_settings" model="ir.ui.view">
+            <field name="name">Website Maintenance settings</field>
+            <field name="model">website.config.settings</field>
+            <field name="inherit_id" ref="website.view_website_config_settings" />
+            <field name="arch" type="xml">
+                <group string="Menu" position="before">
+                    <group string="Maintenance Mode">
+                        <field name="maintenance_mode" />
+                        <field name="maintenance_message" placeholder="(Opcional) We're undergoing maintenance now, please come back later."/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+    </data>
+</openerp>
