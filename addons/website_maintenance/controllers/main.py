@@ -4,13 +4,10 @@ import werkzeug
 import openerp
 from openerp.addons.web import http
 from openerp.http import request
-#from openerp.exceptions import Warning
 
 logger = logging.getLogger(__name__)
 
 
-class MaintenanceError(BaseException):
-    pass
 
 class WebsiteMaintenance(openerp.addons.website.controllers.main.Website):
     
