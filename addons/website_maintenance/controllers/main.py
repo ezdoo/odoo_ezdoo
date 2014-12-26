@@ -1,12 +1,13 @@
 import logging
-
-import werkzeug
 import openerp
-from openerp.addons.web import http
 from openerp.http import request
 
-logger = logging.getLogger(__name__)
+import werkzeug
 
+from openerp.addons.web import http
+
+
+logger = logging.getLogger(__name__)
 
 
 class WebsiteMaintenance(openerp.addons.website.controllers.main.Website):

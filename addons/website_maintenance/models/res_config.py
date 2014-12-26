@@ -1,6 +1,7 @@
 #from openerp.osv import fields, osv
 from openerp import models, fields, api
 
+
 class website_maintenance_config_settings(models.Model):
     _inherit= 'website.config.settings'
 
