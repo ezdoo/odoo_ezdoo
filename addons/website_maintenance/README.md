@@ -10,7 +10,9 @@ Screenshots
 
 
 Website Offline
+
 ![Maintenance Mode On](static/description/website_maintenance.png)
 
 Settings window
+
 ![Settings](static/description/website_maintenance_settings.png)
