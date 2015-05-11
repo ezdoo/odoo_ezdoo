@@ -5,13 +5,13 @@ from openerp.http import request
 import werkzeug
 
 from openerp.addons.web import http
-
+from openerp.addons.website.controllers.main import Website
 
 logger = logging.getLogger(__name__)
 
 
-class WebsiteMaintenance(openerp.addons.website.controllers.main.Website):
-    
+class WebsiteMaintenance(Website):
+
     def is_maintenance_mode(self):
         is_on = ['on', '1', 'true', 'yes']
         maintenance_mode = request.registry['ir.config_parameter'].get_param(
