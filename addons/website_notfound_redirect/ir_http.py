@@ -7,6 +7,7 @@ from openerp.osv import orm
 
 logger = logging.getLogger(__name__)
 
+
 class ir_http(orm.AbstractModel):
     _inherit = 'ir.http'
 
@@ -19,8 +20,8 @@ class ir_http(orm.AbstractModel):
             url = url_conf.get_param(request.cr,
                                      request.uid,
                                      'website.notfound_redirect_url')
+            url_request = "%s%s" % (url, page)
             if url:
-                url_request = "%s%s" % (url, page)
                 logger.info("Checking remote url: %s" % (url_request))
                 try:
                     req = urllib2.Request(url_request)
@@ -29,13 +30,13 @@ class ir_http(orm.AbstractModel):
                     request_old = False
             else:
                 logger.info("No url to redirect defined")
-                request_old = False
+                return super(ir_http, self)._handle_exception(exception, code)
 
             if url and request_old:
                 logger.info("Redirect to %s" % (url_request))
                 return request.redirect(url_request, code=302)
             else:
-                logger.info("URL really not found: %s" % (url_request))
+                logger.info("URL remote not found: %s" % (url_request))
                 return super(ir_http, self)._handle_exception(exception, code)
 
         return super(ir_http, self)._handle_exception(exception, code)
