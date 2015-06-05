@@ -14,18 +14,19 @@ class ir_http(orm.AbstractModel):
         code = getattr(exception, 'code', code)
         if code == 404:
             page = request.httprequest.path
-            logger.info("404 code... %s" % (page))
+            logger.info("Resolving 404 error code... %s" % (page))
             url = request.registry['ir.config_parameter'].get_param(request.cr,
                 request.uid, 'website.notfound_redirect_url')
             if url:
                 url_request = "%s%s" % (url, page)
-                logger.info("The redirect url: %s" % (url_request))
+                logger.info("Checking remote url: %s" % (url_request))
                 try:
                     req = urllib2.Request(url_request)
                     request_old = urllib2.urlopen(req)
                 except (urllib2.HTTPError, urllib2.URLError):
                     request_old = False
             else:
+                logger.info("No url to redirect defined")
                 request_old = False
 
             if not request_old:
