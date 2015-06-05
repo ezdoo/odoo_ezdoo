@@ -1,7 +1,7 @@
 Odoo Ezdoo
 ==========
 
-[![Error Tracking](https://d26gfdfi90p7cf.cloudfront.net/rollbar-badge.144534.o.png "Rollbar Error Tracking")](https://rollbar.com)
+[![Error Tracking](https://d26gfdfi90p7cf.cloudfront.net/rollbar-badge.144534.o.png "Use Rollbar Error Tracking")](https://rollbar.com)
 
 Custom Odoo modules used by service Easy Odoo http://www.easyodoo.com/page/aboutus
 
