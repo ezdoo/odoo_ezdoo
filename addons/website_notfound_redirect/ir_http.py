@@ -15,8 +15,10 @@ class ir_http(orm.AbstractModel):
         if code == 404:
             page = request.httprequest.path
             logger.info("Resolving 404 error code... %s" % (page))
-            url = request.registry['ir.config_parameter'].get_param(request.cr,
-                request.uid, 'website.notfound_redirect_url')
+            url_conf = request.registry['ir.config_parameter']
+            url = url_conf.get_param(request.cr,
+                                     request.uid,
+                                     'website.notfound_redirect_url')
             if url:
                 url_request = "%s%s" % (url, page)
                 logger.info("Checking remote url: %s" % (url_request))
@@ -29,11 +31,11 @@ class ir_http(orm.AbstractModel):
                 logger.info("No url to redirect defined")
                 request_old = False
 
-            if not request_old:
-                logger.info("URL not found: %s" % (url_request))
-                return super(ir_http, self)._handle_exception(exception, code)
-            else:
+            if url and request_old:
                 logger.info("Redirect to %s" % (url_request))
                 return request.redirect(url_request, code=302)
+            else:
+                logger.info("URL really not found: %s" % (url_request))
+                return super(ir_http, self)._handle_exception(exception, code)
 
         return super(ir_http, self)._handle_exception(exception, code)
