@@ -2,7 +2,7 @@
 from openerp import models, fields, api
 
 
-class website_maintenance_config_settings(models.Model):
+class website_maintenance_config_settings(models.TransientModel):
     _inherit = 'website.config.settings'
 
     is_on = ['yes', 'true', '1', 'on']
