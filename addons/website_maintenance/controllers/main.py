@@ -18,7 +18,7 @@ class WebsiteMaintenance(Website):
             request.cr, request.uid, 'website.maintenance_mode')
         logger.debug("maintenance_mode value: %s" % (maintenance_mode))
         if maintenance_mode in is_on:
-            logger.warn("Maintenance mode on")
+            logger.info("Maintenance mode on")
 
             if not request.uid:
                 logger.info("Not uid, request auth public")
@@ -26,7 +26,7 @@ class WebsiteMaintenance(Website):
 
             allowed_group = request.env['ir.model.data'].sudo().get_object('base', 'group_website_designer')
             if allowed_group in request.env.user.groups_id:
-                logger.warn("Maintenance mode off for user_id: %s" % (request.env.user.id))
+                logger.info("Maintenance mode off for user_id: %s" % (request.env.user.id))
                 return
 
             code=503
