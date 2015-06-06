@@ -1,5 +1,4 @@
 import logging
-import openerp
 from openerp.http import request
 
 import werkzeug
@@ -24,12 +23,15 @@ class WebsiteMaintenance(Website):
                 logger.info("Not uid, request auth public")
                 self._auth_method_public()
 
-            allowed_group = request.env['ir.model.data'].sudo().get_object('base', 'group_website_designer')
+            ir_model = request.env['ir.model.data'].sudo()
+            allowed_group = ir_model.get_object('base',
+                                                'group_website_designer')
             if allowed_group in request.env.user.groups_id:
-                logger.info("Maintenance mode off for user_id: %s" % (request.env.user.id))
+                logger.info("Maintenance mode off for user_id: %s" %
+                            (request.env.user.id))
                 return
 
-            code=503
+            code = 503
             status_message = request.registry['ir.config_parameter'].get_param(
                 request.cr, request.uid, 'website.maintenance_message',
                 "We're maintenance now")
@@ -40,10 +42,13 @@ class WebsiteMaintenance(Website):
             }
             logger.debug(values)
             try:
-                html = request.website._render('website_maintenance.%s' % code, values)
+                html = request.website._render('website_maintenance.%s' %
+                                               code, values)
             except Exception:
                 html = request.website._render('website.http_error', values)
-            return werkzeug.wrappers.Response(html, status=code, content_type='text/html;charset=utf-8')
+            return werkzeug.wrappers.Response(html, status=code,
+                                              content_type=
+                                              'text/html;charset=utf-8')
 
     @http.route('/', type='http', auth="public", website=True)
     def index(self, **kw):
