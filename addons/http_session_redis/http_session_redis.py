@@ -19,7 +19,6 @@
 
 #
 ##############################################################################
-# import werkzeug.contrib.sessions
 
 import redis
 from openerp import tools
@@ -42,34 +41,11 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-# session_store_orig = http.session_store
-
-
-# class Root(http.Root):
-#     """Overrides Oddo Root class."""
-#     def redis_config(self):
-
-#         return False
-
-#     @lazy_property
-#     def session_store(self):
-#         """Override function session_store and fallback to Odoo default"""
-#         _logger.debug('HTTP sessions stored in: %s')
-#         _logger.info('session store redis')
-#         if self.redis_config:
-#             return RedisSession
-#         else:
-#             return super(Root, self).session_store()
-
-#         assert True
-
-#     def session_store_redis(self):
-#         assert True
-# root_session_store_org = Root.session_store
 redis_host = tools.config.get('redis_host', 'localhost')
 redis_port = int(tools.config.get('redis_port', 6379))
 redis_dbindex = int(tools.config.get('redis_dbindex', 1))
 redis_password = tools.config.get('redis_pass', None)
+
 
 class RedisSessionStore(SessionStore):
     def __init__(self, expire=1800, key_prefix='',
