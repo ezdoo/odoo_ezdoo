@@ -18,3 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+{
+    'name': 'Odoo HTTP Redis SessionStore',
+    'version': '1.0',
+    'category': 'Hidden',
+    'description': """This module handle the maintenance for Odoo website.""",
+    'author': 'BarraDev Consulting',
+    'website': 'www.barradev.com',
+    'summary': 'Uses Redis server to store Odoo/werkzeug sessions.',
+    'license': 'AGPL-3',
+    'depends': [
+        'web'
+    ],
+    'data': [],
+    'demo': [],
+    'installable': False,
+    'auto_install': False,
+    "external_dependencies": {
+        'python': ['redis'],
+    },
+}
