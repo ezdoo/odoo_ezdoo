@@ -20,7 +20,6 @@
 #
 ##############################################################################
 
-import redis
 from openerp import tools
 from openerp.http import OpenERPSession, Root
 from openerp.tools.func import lazy_property
