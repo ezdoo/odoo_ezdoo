@@ -103,6 +103,9 @@ def session_store(self):
                                  redis_dbindex,
                                  password=redis_password)
         redis_conn.get('anything')
+        _logger.info("Redis host: %s, port: %s, dbindex: %s", (redis_host,
+                                                               redis_port,
+                                                               redis_dbindex))
     except:
         _logger.info('Redis fail, using FileSystemSessionStore for session')
         return self.org_session_store
