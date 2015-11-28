@@ -66,7 +66,7 @@ class RedisSessionStore(SessionStore):
     def save(self, session):
         key = self._get_session_key(session.sid)
         data = pickle.dumps(dict(session))
-        # _logger.info("Save: %s, %s", (key, data))
+        _logger.debug("Save: %s", key)
         self.redis.setex(key, data, self.expire)
 
     def delete(self, session):
@@ -74,8 +74,8 @@ class RedisSessionStore(SessionStore):
         self.redis.delete(key)
 
     def _get_session_key(self, sid):
-        # _logger.info("SessionId: %s", sid)
         key = self.key_prefix + sid
+        _logger.debug("SessionKey: %s", key)
         if isinstance(key, unicode):
             key = key.encode('utf-8')
         return key
@@ -83,7 +83,7 @@ class RedisSessionStore(SessionStore):
     def get(self, sid):
         key = self._get_session_key(sid)
         data = self.redis.get(key)
-        # _logger.info("Get: %s, %s", (key, data))
+        _logger.debug("Get: %s", key)
         if data:
             self.redis.setex(key, data, self.expire)
             data = pickle.loads(data)
@@ -94,7 +94,7 @@ class RedisSessionStore(SessionStore):
 
 @lazy_property
 def session_store(self):
-    _logger.info('Starting HTTP session store with Redis')
+    _logger.debug('Starting HTTP session store with Redis')
     if not _redis_import:
         return self.org_session_store
     try:
