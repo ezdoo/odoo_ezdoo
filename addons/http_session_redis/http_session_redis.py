@@ -92,10 +92,15 @@ class RedisSessionStore(SessionStore):
         return self.session_class(data, sid, False)
 
 
+def fail_redis(self):
+    _logger.info('Redis fail, using FileSystemSessionStore for session')
+
+
 @lazy_property
 def session_store(self):
     _logger.debug('Starting HTTP session store with Redis')
     if not _redis_import:
+        fail_redis()
         return self.org_session_store
     try:
         redis_conn = redis.Redis(redis_host,
@@ -103,11 +108,10 @@ def session_store(self):
                                  redis_dbindex,
                                  password=redis_password)
         redis_conn.get('anything')
-        _logger.info("Redis host: %s, port: %s, dbindex: %s", (redis_host,
-                                                               redis_port,
-                                                               redis_dbindex))
+        _logger.info("Redis host: {}, port: {}, dbindex: {}"
+                     .format(redis_host, redis_port, redis_dbindex))
     except:
-        _logger.info('Redis fail, using FileSystemSessionStore for session')
+        fail_redis()
         return self.org_session_store
 
     return RedisSessionStore(session_class=OpenERPSession,
