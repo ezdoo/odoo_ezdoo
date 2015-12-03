@@ -21,6 +21,7 @@
 ##############################################################################
 
 from openerp import tools
+from openerp import http
 from openerp.http import OpenERPSession, Root
 from openerp.tools.func import lazy_property
 from werkzeug.contrib.sessions import SessionStore
@@ -57,8 +58,6 @@ class RedisSessionStore(SessionStore):
                                           redis_dbindex,
                                           password=redis_password)
         self.redis = redis_conn
-        # self.path = session_path()
-        # self.path = '/'
         self.session_class = session_class
         self.expire = expire
         self.key_prefix = key_prefix
@@ -117,5 +116,13 @@ def session_store(self):
     return RedisSessionStore(session_class=OpenERPSession,
                              redis_conn=redis_conn)
 
+
+def redis_session_gc(session_store):
+    pass
+
+
 Root.org_session_store = Root.session_store
 Root.session_store = session_store
+
+http.session_gc_org = http.session_gc
+http.session_gc = redis_session_gc
