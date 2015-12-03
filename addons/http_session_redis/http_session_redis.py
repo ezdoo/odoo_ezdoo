@@ -100,7 +100,7 @@ def fail_redis(self):
 def session_store(self):
     _logger.debug('Starting HTTP session store with Redis')
     if not _redis_import:
-        fail_redis()
+        fail_redis(self)
         return self.org_session_store
     try:
         redis_conn = redis.Redis(redis_host,
@@ -111,7 +111,7 @@ def session_store(self):
         _logger.info("Redis host: {}, port: {}, dbindex: {}"
                      .format(redis_host, redis_port, redis_dbindex))
     except:
-        fail_redis()
+        fail_redis(self)
         return self.org_session_store
 
     return RedisSessionStore(session_class=OpenERPSession,
