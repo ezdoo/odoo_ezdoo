@@ -1,0 +1,36 @@
+<openerp>
+    <data>
+        <template id="custom_assets_javascript" name="Custom Assets Javascript Snippet" >
+            <t t-raw="request.website.get_custom_assets()[0]['custom_assets_javascripts']" />
+        </template>
+
+        <template id="custom_assets_stylesheet" name="Custom Assets Stylesheet Snippet" >
+            <t t-raw="request.website.get_custom_assets()[0]['custom_assets_stylesheets']" />
+        </template>
+
+        <template id="layout_custom_assets" name="Layout Custom Assets"  inherit_id="website.layout">
+            <xpath expr='html/head' position="inside">
+                <t t-call="website_custom_assets.custom_assets_stylesheet"/>
+            </xpath>
+
+            <xpath expr='html/body' position="inside">
+                <t t-call="website_custom_assets.custom_assets_javascript"/>
+            </xpath>
+        </template>
+
+        <record id="view_website_custom_assets_config_settings" model="ir.ui.view">
+            <field name="name">Website Custom Assets settings</field>
+            <field name="model">website.config.settings</field>
+            <field name="inherit_id" ref="website.view_website_config_settings" />
+            <field name="arch" type="xml">
+                <group string="Menu" position="before">
+                    <group string="Custom Assets">
+                        <field name="custom_assets_stylesheets" />
+                        <field name="custom_assets_javascripts" />
+                    </group>
+                </group>
+            </field>
+        </record>
+
+    </data>
+</openerp>
