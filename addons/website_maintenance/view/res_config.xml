@@ -7,12 +7,12 @@
             <field name="model">website.config.settings</field>
             <field name="inherit_id" ref="website.view_website_config_settings" />
             <field name="arch" type="xml">
-                <group string="Menu" position="before">
+                <xpath expr="//group" position="after">
                     <group string="Maintenance Mode">
                         <field name="maintenance_mode" />
                         <field name="maintenance_message" placeholder="(Opcional) We're undergoing maintenance now, please come back later."/>
                     </group>
-                </group>
+                </xpath>
             </field>
         </record>
 
