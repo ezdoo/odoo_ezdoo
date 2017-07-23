@@ -1,11 +1,15 @@
 <openerp>
     <data>
         <template id="custom_assets_javascript" name="Custom Assets Javascript Snippet" >
-            <t t-raw="request.website.get_custom_assets()[0]['custom_assets_javascripts']" />
+            <t t-if="request and website">
+                <t t-raw="request.website.get_custom_assets()[0]['custom_assets_javascripts']" />
+            </t>
         </template>
 
         <template id="custom_assets_stylesheet" name="Custom Assets Stylesheet Snippet" >
-            <t t-raw="request.website.get_custom_assets()[0]['custom_assets_stylesheets']" />
+            <t t-if="request and website">
+                <t t-raw="request.website.get_custom_assets()[0]['custom_assets_stylesheets']" />
+            </t>
         </template>
 
         <template id="layout_custom_assets" name="Layout Custom Assets"  inherit_id="website.layout">
